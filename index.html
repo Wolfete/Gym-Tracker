@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progressive Overload Tracker</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            margin: 0; 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; 
+            background-color: #f9fafb;
+        }
+        .icon { width: 20px; height: 20px; stroke-width: 2; }
+        .icon-lg { width: 28px; height: 28px; stroke-width: 2; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Simple icons as SVG components
+        const DumbbellIcon = () => (
+            <svg className="icon-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7 8h10m0 0V6a2 2 0 00-2-2H9a2 2 0 00-2 2v2m10 0v8a2 2 0 01-2 2H9a2 2 0 01-2-2v-8m10 0H7m0 0H5a2 2 0 00-2 2v4a2 2 0 002 2h2m0-8H5a2 2 0 00-2 2v4a2 2 0 002 2h2" />
+            </svg>
+        );
+
+        const CalendarIcon = () => (
+            <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+        );
+
+        const TrendingUpIcon = () => (
+            <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+        );
+
+        const PlusIcon = () => (
+            <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+        );
+
+        const BarChartIcon = () => (
+            <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+        );
+
+        const ProgressiveOverloadTracker = () => {
+            const [workouts, setWorkouts] = useState([]);
+            const [currentWorkout, setCurrentWorkout] = useState(null);
+            const [activeTab, setActiveTab] = useState('workout');
+
+            // Load data from localStorage on mount
+            useEffect(() => {
+                const savedWorkouts = localStorage.getItem('gymWorkouts');
+                if (savedWorkouts) {
+                    try {
+                        setWorkouts(JSON.parse(savedWorkouts));
+                    } catch (e) {
+                        console.error('Error loading workouts:', e);
+                    }
+                }
+            }, []);
+
+            // Save workouts to localStorage whenever workouts change
+            useEffect(() => {
+                if (workouts.length > 0) {
+                    localStorage.setItem('gymWorkouts', JSON.stringify(workouts));
+                }
+            }, [workouts]);
+
+            // Your training plan
+            const trainingPlan = [
+                { name: 'Bench Press', sets: [
+                    { set: 1, targetReps: 5, targetWeight: 70 },
+                    { set: 2, targetReps: 5, targetWeight: 70 },
+                    { set: 3, targetReps: 3, targetWeight: 70 },
+                    { set: 4, targetReps: 7, targetWeight: 60 }
+                ]},
+                { name: 'Weighted Pull-ups', sets: [
+                    { set: 1, targetReps: 5, targetWeight: 10 },
+                    { set: 2, targetReps: 5, targetWeight: 10 },
+                    { set: 3, targetReps: 5, targetWeight: 10 },
+                    { set: 4, targetReps: 5, targetWeight: 15 }
+                ]},
+                { name: 'Lat Pulldown', sets: [
+                    { set: 1, targetReps: 6, targetWeight: 80 },
+                    { set: 2, targetReps: 6, targetWeight: 80 },
+                    { set: 3, targetReps: 6, targetWeight: 80 },
+                    { set: 4, targetReps: 4, targetWeight: 60 }
+                ]},
+                { name: 'Shoulder Press', sets: [
+                    { set: 1, targetReps: 8, targetWeight: 17.5 },
+                    { set: 2, targetReps: 8, targetWeight: 17.5 },
+                    { set: 3, targetReps: 8, targetWeight: 17.5 }
+                ]},
+                { name: 'Shoulder Lateral Raise', sets: [
+                    { set: 1, targetReps: 6, targetWeight: 12.5 },
+                    { set: 2, targetReps: 6, targetWeight: 12.5 },
+                    { set: 3, targetReps: 6, targetWeight: 12.5 }
+                ]},
+                { name: 'Bicep EZ Bar Curls', sets: [
+                    { set: 1, targetReps: 6, targetWeight: 40.5 },
+                    { set: 2, targetReps: 6, targetWeight: 40.5 },
+                    { set: 3, targetReps: 6, targetWeight: 40.5 }
+                ]},
+                { name: 'Tricep Cable Pushdown', sets: [
+                    { set: 1, targetReps: 8, targetWeight: 40 },
+                    { set: 2, targetReps: 8, targetWeight: 40 },
+                    { set: 3, targetReps: 8, targetWeight: 40 }
+                ]},
+                { name: 'Brachialis Reverse Curls', sets: [
+                    { set: 1, targetReps: 6, targetWeight: 33 },
+                    { set: 2, targetReps: 6, targetWeight: 33 },
+                    { set: 3, targetReps: 6, targetWeight: 33 }
+                ]}
+            ];
+
+            // Initialize current workout
+            useEffect(() => {
+                if (!currentWorkout) {
+                    const newWorkout = {
+                        date: new Date().toISOString().split('T')[0],
+                        exercises: trainingPlan.map(exercise => ({
+                            name: exercise.name,
+                            sets: exercise.sets.map(set => ({
+                                set: set.set,
+                                targetReps: set.targetReps,
+                                targetWeight: set.targetWeight,
+                                actualReps: '',
+                                actualWeight: set.targetWeight,
+                                completed: false
+                            }))
+                        }))
+                    };
+                    setCurrentWorkout(newWorkout);
+                }
+            }, [trainingPlan]);
+
+            const updateSet = (exerciseIndex, setIndex, field, value) => {
+                setCurrentWorkout(prev => ({
+                    ...prev,
+                    exercises: prev.exercises.map((exercise, eIdx) => 
+                        eIdx === exerciseIndex 
+                            ? {
+                                ...exercise,
+                                sets: exercise.sets.map((set, sIdx) => 
+                                    sIdx === setIndex 
+                                        ? { ...set, [field]: value }
+                                        : set
+                                )
+                            }
+                            : exercise
+                    )
+                }));
+            };
+
+            const completeWorkout = () => {
+                setWorkouts(prev => [...prev, currentWorkout]);
+                // Start new workout
+                const newWorkout = {
+                    date: new Date().toISOString().split('T')[0],
+                    exercises: trainingPlan.map(exercise => ({
+                        name: exercise.name,
+                        sets: exercise.sets.map(set => ({
+                            set: set.set,
+                            targetReps: set.targetReps,
+                            targetWeight: set.targetWeight,
+                            actualReps: '',
+                            actualWeight: set.targetWeight,
+                            completed: false
+                        }))
+                    }))
+                };
+                setCurrentWorkout(newWorkout);
+            };
+
+            const getExerciseProgress = (exerciseName) => {
+                return workouts
+                    .map(workout => ({
+                        date: workout.date,
+                        exercise: workout.exercises.find(ex => ex.name === exerciseName)
+                    }))
+                    .filter(entry => entry.exercise)
+                    .slice(-5); // Last 5 sessions
+            };
+
+            const formatWeight = (weight) => {
+                return weight % 1 === 0 ? weight.toString() : weight.toFixed(1);
+            };
+
+            if (!currentWorkout) {
+                return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+            }
+
+            return (
+                <div className="max-w-4xl mx-auto p-4 bg-gray-50 min-h-screen">
+                    <div className="bg-white rounded-lg shadow-lg">
+                        {/* Header */}
+                        <div className="bg-blue-600 text-white p-4 rounded-t-lg">
+                            <div className="flex items-center gap-3">
+                                <DumbbellIcon />
+                                <div>
+                                    <h1 className="text-xl font-bold">Progressive Overload Tracker</h1>
+                                    <p className="opacity-90 text-sm">Track your strength gains over time</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Navigation */}
+                        <div className="flex border-b">
+                            <button
+                                onClick={() => setActiveTab('workout')}
+                                className={`flex items-center gap-2 px-4 py-3 font-medium text-sm ${
+                                    activeTab === 'workout' 
+                                        ? 'bg-blue-50 text-blue-600 border-b-2 border-blue-600' 
+                                        : 'text-gray-600 hover:bg-gray-50'
+                                }`}
+                            >
+                                <PlusIcon />
+                                Current Workout
+                            </button>
+                            <button
+                                onClick={() => setActiveTab('progress')}
+                                className={`flex items-center gap-2 px-4 py-3 font-medium text-sm ${
+                                    activeTab === 'progress' 
+                                        ? 'bg-blue-50 text-blue-600 border-b-2 border-blue-600' 
+                                        : 'text-gray-600 hover:bg-gray-50'
+                                }`}
+                            >
+                                <TrendingUpIcon />
+                                Progress ({workouts.length})
+                            </button>
+                        </div>
+
+                        <div className="p-4">
+                            {activeTab === 'workout' && (
+                                <div className="space-y-4">
+                                    <div className="flex items-center justify-between">
+                                        <h2 className="text-lg font-semibold flex items-center gap-2">
+                                            <CalendarIcon />
+                                            Today's Workout
+                                        </h2>
+                                        <button
+                                            onClick={completeWorkout}
+                                            className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm"
+                                        >
+                                            Complete Workout
+                                        </button>
+                                    </div>
+
+                                    <div className="space-y-3">
+                                        {currentWorkout.exercises.map((exercise, exerciseIdx) => (
+                                            <div key={exercise.name} className="bg-gray-50 rounded-lg p-3">
+                                                <h3 className="font-semibold mb-2">{exercise.name}</h3>
+                                                <div className="space-y-2">
+                                                    {exercise.sets.map((set, setIdx) => (
+                                                        <div key={set.set} className="flex items-center gap-2 bg-white p-2 rounded text-sm">
+                                                            <span className="w-8 text-center font-medium">#{set.set}</span>
+                                                            <span className="text-xs text-gray-600 w-16">Target: {set.targetReps}×{formatWeight(set.targetWeight)}</span>
+                                                            <input
+                                                                type="number"
+                                                                placeholder="Reps"
+                                                                value={set.actualReps}
+                                                                onChange={(e) => updateSet(exerciseIdx, setIdx, 'actualReps', e.target.value)}
+                                                                className="w-14 p-1 border rounded text-center"
+                                                            />
+                                                            <span className="text-xs">×</span>
+                                                            <input
+                                                                type="number"
+                                                                step="0.5"
+                                                                placeholder="Weight"
+                                                                value={set.actualWeight}
+                                                                onChange={(e) => updateSet(exerciseIdx, setIdx, 'actualWeight', parseFloat(e.target.value) || 0)}
+                                                                className="w-16 p-1 border rounded text-center"
+                                                            />
+                                                            <span className="text-xs">kg</span>
+                                                            <label className="flex items-center gap-1 ml-2">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    checked={set.completed}
+                                                                    onChange={(e) => updateSet(exerciseIdx, setIdx, 'completed', e.target.checked)}
+                                                                    className="w-4 h-4"
+                                                                />
+                                                                <span className="text-xs">Done</span>
+                                                            </label>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {activeTab === 'progress' && (
+                                <div className="space-y-4">
+                                    <h2 className="text-lg font-semibold flex items-center gap-2">
+                                        <BarChartIcon />
+                                        Your Progress
+                                    </h2>
+
+                                    {workouts.length === 0 ? (
+                                        <div className="text-center py-8 text-gray-500">
+                                            <TrendingUpIcon />
+                                            <p className="mt-2">Complete your first workout to see progress!</p>
+                                        </div>
+                                    ) : (
+                                        <div className="space-y-4">
+                                            {trainingPlan.map(exercise => {
+                                                const progress = getExerciseProgress(exercise.name);
+                                                return (
+                                                    <div key={exercise.name} className="bg-gray-50 rounded-lg p-3">
+                                                        <h3 className="font-semibold mb-2">{exercise.name}</h3>
+                                                        {progress.length > 0 ? (
+                                                            <div className="space-y-1">
+                                                                {progress.map((entry, idx) => (
+                                                                    <div key={idx} className="flex items-center gap-3 text-xs">
+                                                                        <span className="w-16 text-gray-600">{new Date(entry.date).toLocaleDateString()}</span>
+                                                                        <div className="flex gap-2 flex-wrap">
+                                                                            {entry.exercise.sets.map((set, setIdx) => (
+                                                                                <span key={setIdx} className="bg-white px-2 py-1 rounded">
+                                                                                    {set.actualReps || set.targetReps}×{formatWeight(set.actualWeight)}
+                                                                                </span>
+                                                                            ))}
+                                                                        </div>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        ) : (
+                                                            <p className="text-gray-500 text-xs">No data yet</p>
+                                                        )}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<ProgressiveOverloadTracker />, document.getElementById('root'));
+    </script>
+</body>
+</html>
