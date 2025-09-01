@@ -174,7 +174,22 @@
             };
 
             const completeWorkout = () => {
-                setWorkouts(prev => [...prev, currentWorkout]);
+                // Only save exercises that have at least one completed set
+                const completedWorkout = {
+                    ...currentWorkout,
+                    exercises: currentWorkout.exercises
+                        .map(exercise => ({
+                            ...exercise,
+                            sets: exercise.sets.filter(set => set.completed)
+                        }))
+                        .filter(exercise => exercise.sets.length > 0)
+                };
+                
+                if (completedWorkout.exercises.length > 0) {
+                    setWorkouts(prev => [...prev, completedWorkout]);
+                }
+                
+                // Start new workout
                 const newWorkout = {
                     date: new Date().toISOString().split('T')[0],
                     exercises: trainingPlan.map(exercise => ({
@@ -380,6 +395,9 @@
                                                                     </div>
                                                                 </div>
                                                             ))}
+                                                            {workout.exercises.length === 0 && (
+                                                                <p className="text-gray-500 text-xs italic">No exercises completed</p>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 ))}
