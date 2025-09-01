@@ -1,33 +1,12 @@
-<script>
-        // Enhanced PWA setup for Android
-        window.addEventListener('load', () => {
-            // Create manifest dynamically
-            const manifest = {
-                "name": "Progressive Overload Tracker",
-                "short_name": "Gym Tracker",
-                "description": "Track your strength gains over time",
-                "start_url": "./",
-                "scope": "./",
-                "display": "standalone",
-                "orientation": "portrait",
-                "theme_color": "#2563eb",
-                "background_color": "#f9fafb",
-                "icons": [
-                    {
-                        "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEfUlEQVR4nO3dMW7bQBSEYY8SJ0mTOm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmTNm3atGnTpkmT<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gym Tracker</title>
-    
-    <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#2563eb">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Gym Tracker">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFuklEQVR4nO3d7XHbMAyAYXfIBt3AG3SDbtANskE36AbZoBN4g27QDbpBN+gG2aAbdIMb9w/JlmTJFgmAIJ/nzsmd7chfhCQ+kJQkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZI=">
     
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -49,7 +28,6 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // Simple icons as SVG components
         const DumbbellIcon = () => (
             <svg className="icon-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M7 8h10m0 0V6a2 2 0 00-2-2H9a2 2 0 00-2 2v2m10 0v8a2 2 0 01-2 2H9a2 2 0 01-2-2v-8m10 0H7m0 0H5a2 2 0 00-2 2v4a2 2 0 002 2h2m0-8H5a2 2 0 00-2 2v4a2 2 0 002 2h2" />
@@ -92,7 +70,6 @@
             const [activeTab, setActiveTab] = useState('workout');
             const [workoutToDelete, setWorkoutToDelete] = useState(null);
 
-            // Load data from localStorage on mount
             useEffect(() => {
                 const savedWorkouts = localStorage.getItem('gymWorkouts');
                 if (savedWorkouts) {
@@ -104,7 +81,6 @@
                 }
             }, []);
 
-            // Save workouts to localStorage whenever workouts change
             useEffect(() => {
                 if (workouts.length > 0) {
                     localStorage.setItem('gymWorkouts', JSON.stringify(workouts));
@@ -113,7 +89,6 @@
                 }
             }, [workouts]);
 
-            // Your training plan
             const trainingPlan = [
                 { name: 'Bench Press', sets: [
                     { set: 1, targetReps: 5, targetWeight: 70 },
@@ -160,7 +135,6 @@
                 ]}
             ];
 
-            // Initialize current workout
             useEffect(() => {
                 if (!currentWorkout) {
                     const newWorkout = {
@@ -201,7 +175,6 @@
 
             const completeWorkout = () => {
                 setWorkouts(prev => [...prev, currentWorkout]);
-                // Start new workout
                 const newWorkout = {
                     date: new Date().toISOString().split('T')[0],
                     exercises: trainingPlan.map(exercise => ({
@@ -231,7 +204,7 @@
                         exercise: workout.exercises.find(ex => ex.name === exerciseName)
                     }))
                     .filter(entry => entry.exercise)
-                    .slice(-5); // Last 5 sessions
+                    .slice(-5);
             };
 
             const formatWeight = (weight) => {
@@ -245,7 +218,6 @@
             return (
                 <div className="max-w-4xl mx-auto p-4 bg-gray-50 min-h-screen">
                     <div className="bg-white rounded-lg shadow-lg">
-                        {/* Header */}
                         <div className="bg-blue-600 text-white p-4 rounded-t-lg">
                             <div className="flex items-center gap-3">
                                 <DumbbellIcon />
@@ -256,7 +228,6 @@
                             </div>
                         </div>
 
-                        {/* Navigation */}
                         <div className="flex border-b">
                             <button
                                 onClick={() => setActiveTab('workout')}
@@ -356,7 +327,6 @@
                                         </div>
                                     ) : (
                                         <div className="space-y-4">
-                                            {/* Delete confirmation modal */}
                                             {workoutToDelete !== null && (
                                                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
                                                     <div className="bg-white rounded-lg p-6 max-w-sm w-full">
@@ -383,7 +353,6 @@
                                                 </div>
                                             )}
 
-                                            {/* Workout history with delete buttons */}
                                             <div className="space-y-3">
                                                 <h3 className="font-medium text-gray-700">Workout History</h3>
                                                 {workouts.map((workout, workoutIdx) => (
@@ -416,7 +385,6 @@
                                                 ))}
                                             </div>
 
-                                            {/* Exercise progress trends */}
                                             <div className="space-y-4">
                                                 <h3 className="font-medium text-gray-700">Exercise Progress</h3>
                                                 {trainingPlan.map(exercise => {
@@ -457,76 +425,6 @@
         };
 
         ReactDOM.render(<ProgressiveOverloadTracker />, document.getElementById('root'));
-    </script>
-
-    <script>
-        // Simple PWA setup that works
-        window.addEventListener('load', () => {
-            const manifest = {
-                "name": "Progressive Overload Tracker",
-                "short_name": "Gym Tracker",
-                "description": "Track your strength gains over time",
-                "start_url": "./",
-                "display": "standalone",
-                "theme_color": "#2563eb",
-                "background_color": "#f9fafb",
-                "icons": [
-                    {
-                        "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjE5MiIgaGVpZ2h0PSIxOTIiIHJ4PSIyNCIgZmlsbD0iIzI1NjNlYiIvPjxwYXRoIGQ9Ik00OCA3Mmg5NnY0OEg0OFY3MnoiIGZpbGw9IiNmZmZmZmYiLz4KPHJlY3QgeD0iMzIiIHk9IjgyIiB3aWR0aD0iMjQiIGhlaWdodD0iMjAiIHJ4PSI0IiBmaWxsPSIjZmZmZmZmIi8+CjxyZWN0IHg9IjEzNiIgeT0iODIiIHdpZHRoPSIyNCIgaGVpZ2h0PSIyMCIgcng9IjQiIGZpbGw9IiNmZmZmZmYiLz4KPC9zdmc+",
-                        "sizes": "192x192",
-                        "type": "image/svg+xml"
-                    }
-                ]
-            };
-
-            const manifestBlob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
-            const manifestURL = URL.createObjectURL(manifestBlob);
-            const link = document.createElement('link');
-            link.rel = 'manifest';
-            link.href = manifestURL;
-            document.head.appendChild(link);
-        });
-    </script>SIjZmZmZmZmIi8+Cjwvc3ZnPg==",
-                        "sizes": "512x512",
-                        "type": "image/svg+xml",
-                        "purpose": "any maskable"
-                    }
-                ]
-            };
-
-            const manifestBlob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
-            const manifestURL = URL.createObjectURL(manifestBlob);
-            const link = document.createElement('link');
-            link.rel = 'manifest';
-            link.href = manifestURL;
-            document.head.appendChild(link);
-
-            // Register service worker
-            if ('serviceWorker' in navigator) {
-                const swCode = `
-                    self.addEventListener('install', event => {
-                        console.log('SW installed');
-                        self.skipWaiting();
-                    });
-                    
-                    self.addEventListener('activate', event => {
-                        console.log('SW activated');
-                        event.waitUntil(clients.claim());
-                    });
-                    
-                    self.addEventListener('fetch', event => {
-                        event.respondWith(fetch(event.request));
-                    });
-                `;
-                
-                const swBlob = new Blob([swCode], { type: 'application/javascript' });
-                const swURL = URL.createObjectURL(swBlob);
-                
-                navigator.serviceWorker.register(swURL)
-                    .then(reg => console.log('SW registered'))
-                    .catch(err => console.log('SW registration failed', err));
-            }
-        });
     </script>
 </body>
 </html>
